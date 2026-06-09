@@ -21,10 +21,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
+cors_origins = os.getenv("CORS_ORIGINS", "").split(",")
 # Enable CORS for Next.js frontend calls
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

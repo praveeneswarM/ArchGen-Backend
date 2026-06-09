@@ -32,7 +32,7 @@ class OllamaProvider(AIProvider):
             "model": self.model,
             "prompt": prompt,
             "stream": False,
-            "format": "json",
+            # "format": "json",
             "options": {
                 "temperature": 0.1
             }
@@ -40,7 +40,7 @@ class OllamaProvider(AIProvider):
         
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.post(f"{self.base_url}/api/generate", json=payload, timeout=120) as resp:
+                async with session.post(f"{self.base_url}/api/generate", json=payload, timeout=300) as resp:
                     if resp.status != 200:
                         error_text = await resp.text()
                         logger.error(f"Ollama API error ({resp.status}): {error_text}")
